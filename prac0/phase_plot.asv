@@ -1,0 +1,10 @@
+% Define the transfer function
+num = [1];
+den = [1, 0];
+G = tf(num, den);
+
+S = 0.5*G;
+
+% Print out the transfer function
+S
+
