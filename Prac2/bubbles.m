@@ -1,9 +1,10 @@
 function out = bubbles(num)
 
     % Generate a random matrix of size (num x num)
-    rand_num = rand(num);
+    rand_num = rand(10);
     disp(sort(rand_num))
     % Sort each column of the matrix
+    tic()
     for col = 1:num
         for i = 1:num-1
             for j = 1:num-i
@@ -16,7 +17,7 @@ function out = bubbles(num)
             end
         end
     end
-
+    toc()
     % Output the sorted matrix
     out = rand_num;
 end
