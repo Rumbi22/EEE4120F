@@ -12,6 +12,6 @@ function total_num_one = one_counter()
          end
      end 
      toc()
-    total_num_one = one_counts();
+    total_num_one = one_counts;
     
 end

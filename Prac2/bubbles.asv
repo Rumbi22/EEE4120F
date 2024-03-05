@@ -1,6 +1,9 @@
 function out = bubbles()
     num = 10;
+    % Generate a random matrix of size (num x num)
     rand_num = rand(num);
+    display(sort)
+    % Sort each column of the matrix
     tic()
     for col = 1:num
         for i = 1:num-1
@@ -15,10 +18,6 @@ function out = bubbles()
         end
     end
     toc()
-    
-
-    if rand_num == sort(rand_num)
-        display("Looks about right") %confirm that the matrix is sorted correctly
-    end
+    % Output the sorted matrix
     out = rand_num;
 end
