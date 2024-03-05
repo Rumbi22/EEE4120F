@@ -1,5 +1,5 @@
 function out = bubbles()
-    num = 10;
+    num = 1000; %vary this number when testing
     rand_num = rand(num);
     tic()
     for col = 1:num
@@ -20,5 +20,5 @@ function out = bubbles()
     if rand_num == sort(rand_num)
         display("Looks about right") %confirm that the matrix is sorted correctly
     end
-    out = rand_num;
+    %out = rand_num;
 end

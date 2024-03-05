@@ -1,45 +1,31 @@
-function out = parr_bubble(num)
-    % Generate a random matrix of size (num x num)
+function out = parr_bubble()
+    num = 1000; %vary this during testing
     rand_num = rand(num);
-    %disp(rand_num);
+    
+    tic()
+    %display(rand_num)
+    
+    parfor col = 1:num
+        temp_column = rand_num(:,col)
 
-    % Calculate the number of columns each worker will handle
-    num_columns = ceil(num / numlabs);
-
-
-    % Cell array to store sorted columns from each worker
-    sorted_columns = cell(1, numlabs);
-
-    spmd
-        % Calculate the starting and ending indices for the columns assigned to each worker
-        start_column = (labindex - 1) * num_columns + 1;
-        end_column = min(labindex * num_columns, num); 
-
-        % Sort each column of the matrix
-        for col = start_column:end_column
-            for i = 1:num-1
-                for j = 1:num-i
-                    if rand_num(j, col) > rand_num(j+1, col)
-                        % Swap elements if they are out of order
-                        temp = rand_num(j, col);
-                        rand_num(j, col) = rand_num(j+1, col);
-                        rand_num(j+1, col) = temp;
-                    end
+          for i = 1:num-1
+            for j = 1:num-i
+                if temp_column(j) > temp_column(j+1)
+                    % Swap elements
+                    temp = temp_column(j);
+                    temp_column(j) = temp_column(j+1);
+                    temp_column(j+1) = temp;
                 end
             end
-        end
-    % Output the sorted columns from each worker
-        sorted_columns{labindex} = rand_num(:, start_column:end_column);
+          end
+          rand_num(:,col) = temp_column;
+    end
+    toc()
+
+    if rand_num == sort(rand_num)
+        display("Looks about right") %confirm that the matrix is sorted correctly
     end
 
-    % Concatenate sorted columns into a single matrix
-    out = [];
-    for i = 1:numel(sorted_columns)
-        if ~isempty(sorted_columns{i})
-            out = [out, sorted_columns{i}];
-        end
-    end
-    
-    % Display the sorted matrix
-    disp(out);
+    %out =  rand_num;
+    %disp(out);
 end
